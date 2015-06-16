@@ -127,9 +127,10 @@ map = (function () {
                     // console.log("selection map: " + JSON.stringify(feature));
 
                     var label = '';
-                    if (feature.properties.name != null) {
-                        // label = feature.properties.name;
-                        label = JSON.stringify(feature);
+                    if (feature.properties != null) {
+                        label = JSON.stringify(feature.properties);
+                        label = label.replace(/[{}]/g, "");
+                        label = label.replace(/,"/g, "<br>\"");
                     }
 
                     if (label != '') {

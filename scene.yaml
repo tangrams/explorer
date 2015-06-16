@@ -85,6 +85,10 @@ layers:
                 interactive: true
                 order: 2
                 color: [.4, .4, .4]
+            lines:
+                order: 3
+                color: [.5, .5, .5]
+                width: 1px
         red:
             filter: |
                 function () {
