@@ -198,12 +198,13 @@ layers:
                     return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
+                points:
+                    interactive: true
+                    order: 11
+                    color: '#c88'
+                    size: 10px
                 text:
-                    order: 3
-                    color: red
-                    width: 3px
-                text:
-                    order: 6
+                    order: 12
                     text_source: name
                     font:
                         fill: red
