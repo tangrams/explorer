@@ -173,7 +173,7 @@ layers:
             points:
                 order: 10
                 color: black
-                size: 18px
+                size: 14px
 
     places:
         data: { source: osm }
@@ -185,7 +185,7 @@ layers:
                 interactive: true
                 order: 11
                 color: '#888'
-                size: 14px
+                size: 10px
             text:
                 order: 12
                 text_source: name
