@@ -1,0 +1,161 @@
+cameras:
+    camera1:
+        type: perspective
+        vanishing_point: [-.25, -.75]
+    camera2:
+        type: isometric
+        axis: [.0, 1.]
+        active: true
+
+lights:
+    light1:
+        type: directional
+        diffuse: 1
+        ambient: .35
+
+sources:
+    osm:
+        type: TopoJSONTiles
+        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-HqUVidw
+
+layers:
+    earth:
+        data: { source: osm }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            polygons:
+                interactive: true
+                order: 0
+                color: [.5, .5, .5]
+        red:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                lines:
+                    order: 3
+                    color: red
+                    width: 3px
+                text:
+                    order: 6
+                    text_source: name
+                    font:
+                        typeface: bold 10pt Lucida Grande
+                        fill: white
+                        stroke: { color: black, width: 4 }
+
+    landuse:
+        data: { source: osm }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            polygons:
+                interactive: true
+                order: 1
+                color: [.6, .6, .6]
+        red:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                lines:
+                    order: 3
+                    color: red
+                    width: 3px
+                text:
+                    order: 6
+                    text_source: name
+                    font:
+                        typeface: bold 10pt Lucida Grande
+                        fill: white
+                        stroke: { color: black, width: 4 }
+
+    water:
+        data: { source: osm }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            polygons:
+                interactive: true
+                order: 2
+                color: [.4, .4, .4]
+        red:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                lines:
+                    order: 3
+                    color: red
+                    width: 3px
+                text:
+                    order: 6
+                    text_source: name
+                    font:
+                        typeface: bold 10pt Lucida Grande
+                        fill: white
+                        stroke: { color: black, width: 4 }
+
+    roads:
+        data: { source: osm }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            lines:
+                interactive: true
+                order: 2
+                color: [1, 1, 1]
+                width: 3
+        red:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                lines:
+                    order: 3
+                    color: red
+                    width: 3px
+                text:
+                    order: 6
+                    text_source: name
+                    font:
+                        typeface: bold 10pt Lucida Grande
+                        fill: white
+                        stroke: { color: black, width: 4 }
+
+    buildings:
+        data: { source: osm }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            polygons:
+                interactive: true
+                order: 4
+                color: [.4, .4, .4]
+        red:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                lines:
+                    order: 3
+                    color: red
+                    width: 3px
+                text:
+                    order: 6
+                    text_source: name
+                    font:
+                        typeface: bold 10pt Lucida Grande
+                        fill: white
+                        stroke: { color: black, width: 4 }
