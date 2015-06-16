@@ -67,12 +67,10 @@ map = (function () {
             scene.config.layers["landuse"].properties.key_text = value;
             scene.config.layers["roads"].properties.key_text = value;
             scene.config.layers["buildings"].properties.key_text = value;
-            // scene.config.layers["places"].properties.key_text = value;
+            scene.config.layers["places"].properties.key_text = value;
             scene.rebuildGeometry();
             scene.requestRedraw();
             //updateURL(); 
-            console.log('value now:', scene.config.layers["roads"].properties.key_text);
-            console.log('updatekey done');
         }
 
         gui.valueinput = valuetext;
@@ -85,11 +83,10 @@ map = (function () {
             scene.config.layers["landuse"].properties.value_text = value;
             scene.config.layers["roads"].properties.value_text = value;
             scene.config.layers["buildings"].properties.value_text = value;
-            // scene.config.layers["places"].properties.value_text = value;
+            scene.config.layers["places"].properties.value_text = value;
             scene.rebuildGeometry();
             scene.requestRedraw();
             //updateURL();            
-            console.log('updatevalue done');
         }
         updateKey(keytext);
         updateValue(valuetext);

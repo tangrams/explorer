@@ -164,20 +164,34 @@ layers:
                         fill: white
                         stroke: { color: black, width: 4 }
 
+    places-dot-outlines:
+        data: { source: osm, layer: places }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            points:
+                order: 10
+                color: black
+                size: 18px
+
     places:
         data: { source: osm }
         properties: 
             key_text: ""
             value_text: ""
         draw:
-            text:
+            points:
                 interactive: true
-                order: 5
+                order: 11
+                color: '#888'
+                size: 14px
+            text:
+                order: 12
                 text_source: name
                 font:
                     typeface: 8pt Helvetica
                     fill: '#ccc'
-
         red:
             filter: |
                 function () {
