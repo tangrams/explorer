@@ -2,6 +2,7 @@
 /*global Tangram, gui */
 
 map = (function () {
+// (function () {
     'use strict';
 
     var locations = {
@@ -62,7 +63,7 @@ map = (function () {
             keytext = value;
             if (value == "") value = "willdefinitelynotmatch";
             // scene.config.layers["earth"].properties.key_text = value;
-            // scene.config.layers["water"].properties.key_text = value;
+            scene.config.layers["water"].properties.key_text = value;
             scene.config.layers["landuse"].properties.key_text = value;
             scene.config.layers["roads"].properties.key_text = value;
             scene.config.layers["buildings"].properties.key_text = value;
@@ -80,7 +81,7 @@ map = (function () {
             valuetext = value;
             if (value == "") value = "willdefinitelynotmatch";
             // scene.config.layers["earth"].properties.value_text = value;
-            // scene.config.layers["water"].properties.value_text = value;
+            scene.config.layers["water"].properties.value_text = value;
             scene.config.layers["landuse"].properties.value_text = value;
             scene.config.layers["roads"].properties.value_text = value;
             scene.config.layers["buildings"].properties.value_text = value;
@@ -101,9 +102,58 @@ map = (function () {
         //select input text when you click on it
         keyinput.domElement.id = "keyfilter";
         keyinput.domElement.onclick = function() { this.getElementsByTagName('input')[0].select(); };
-        console.log(valueinput);
         valueinput.domElement.id = "valuefilter";
         valueinput.domElement.onclick = function() { this.getElementsByTagName('input')[0].select(); };
+    }
+
+    // Feature selection
+    function initFeatureSelection () {
+        // Selection info shown on hover
+        var selection_info = document.createElement('div');
+        selection_info.setAttribute('class', 'label');
+        selection_info.style.display = 'block';
+        selection_info.style.zindex = 1000;
+
+        // Show selected feature on hover
+        scene.container.addEventListener('mousemove', function (event) {
+            var pixel = { x: event.clientX, y: event.clientY };
+
+            scene.getFeatureAt(pixel).then(function(selection) {    
+                if (!selection) {
+                    return;
+                }
+                var feature = selection.feature;
+                if (feature != null) {
+                    // console.log("selection map: " + JSON.stringify(feature));
+
+                    var label = '';
+                    if (feature.properties.name != null) {
+                        // label = feature.properties.name;
+                        label = JSON.stringify(feature);
+                    }
+
+                    if (label != '') {
+                        selection_info.style.left = (pixel.x + 5) + 'px';
+                        selection_info.style.top = (pixel.y + 15) + 'px';
+                        selection_info.innerHTML = '<span class="labelInner">' + label + '</span>';
+                        scene.container.appendChild(selection_info);
+                    }
+                    else if (selection_info.parentNode != null) {
+                        selection_info.parentNode.removeChild(selection_info);
+                    }
+                }
+                else if (selection_info.parentNode != null) {
+                    selection_info.parentNode.removeChild(selection_info);
+                }
+            });
+
+            // Don't show labels while panning
+            if (scene.panning == true) {
+                if (selection_info.parentNode != null) {
+                    selection_info.parentNode.removeChild(selection_info);
+                }
+            }
+        });
     }
 
     // Add map
@@ -114,6 +164,8 @@ map = (function () {
             var keyfilter = document.getElementById('keyfilter').getElementsByTagName('input')[0];
             if (keyfilter.value.length == 0) keyfilter.focus();
             else keyfilter.select();
+
+            initFeatureSelection();
         });
         layer.addTo(map);
     });

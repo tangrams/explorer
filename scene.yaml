@@ -112,8 +112,36 @@ layers:
             lines:
                 interactive: true
                 order: 2
-                color: [1, 1, 1]
-                width: 3
+                color: '#bbb'
+                width: 1px
+        red:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                lines:
+                    order: 3
+                    color: red
+                    width: 2px
+                text:
+                    order: 6
+                    text_source: name
+                    font:
+                        typeface: bold 10pt Lucida Grande
+                        fill: white
+                        stroke: { color: black, width: 4 }
+
+    buildings:
+        data: { source: osm }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            polygons:
+                interactive: true
+                order: 4
+                color: '#888'
         red:
             filter: |
                 function () {
@@ -132,23 +160,27 @@ layers:
                         fill: white
                         stroke: { color: black, width: 4 }
 
-    buildings:
+    places:
         data: { source: osm }
         properties: 
             key_text: ""
             value_text: ""
         draw:
-            polygons:
+            text:
                 interactive: true
-                order: 4
-                color: [.4, .4, .4]
+                order: 5
+                text_source: name
+                font:
+                    typeface: 8pt Helvetica
+                    fill: '#ccc'
+
         red:
             filter: |
                 function () {
                     return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
-                lines:
+                text:
                     order: 3
                     color: red
                     width: 3px
@@ -156,6 +188,4 @@ layers:
                     order: 6
                     text_source: name
                     font:
-                        typeface: bold 10pt Lucida Grande
-                        fill: white
-                        stroke: { color: black, width: 4 }
+                        fill: red
