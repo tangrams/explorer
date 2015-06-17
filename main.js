@@ -3,7 +3,7 @@
 
 map = (function () {
 // (function () {
-    'use strict';
+    // 'use strict';
 
     var locations = {
         'Oakland': [37.8044, -122.2708, 15],
@@ -62,12 +62,10 @@ map = (function () {
         function updateKey(value) {
             keytext = value;
             if (value == "") value = "willdefinitelynotmatch";
-            // scene.config.layers["earth"].properties.key_text = value;
-            scene.config.layers["water"].properties.key_text = value;
-            scene.config.layers["landuse"].properties.key_text = value;
-            scene.config.layers["roads"].properties.key_text = value;
-            scene.config.layers["buildings"].properties.key_text = value;
-            scene.config.layers["places"].properties.key_text = value;
+            for (layer in scene.config.layers) {
+                if (layer == "earth") continue;
+                scene.config.layers[layer].properties.key_text = value;
+            }
             scene.rebuildGeometry();
             scene.requestRedraw();
             //updateURL(); 
@@ -77,13 +75,11 @@ map = (function () {
         var valueinput = gui.add(gui, 'valueinput').name("value");
         function updateValue(value) {
             valuetext = value;
-            if (value == "") value = "willdefinitelynotmatch";
-            // scene.config.layers["earth"].properties.value_text = value;
-            scene.config.layers["water"].properties.value_text = value;
-            scene.config.layers["landuse"].properties.value_text = value;
-            scene.config.layers["roads"].properties.value_text = value;
-            scene.config.layers["buildings"].properties.value_text = value;
-            scene.config.layers["places"].properties.value_text = value;
+            // if (value == "") value = "willdefinitelynotmatch";
+            for (layer in scene.config.layers) {
+                if (layer == "earth") continue;
+                scene.config.layers[layer].properties.value_text = value;
+            }
             scene.rebuildGeometry();
             scene.requestRedraw();
             //updateURL();            
@@ -128,6 +124,10 @@ map = (function () {
                         label = JSON.stringify(feature.properties);
                         label = label.replace(/[{}]/g, "");
                         label = label.replace(/,"/g, "<br>\"");
+                        label = label.replace(/":"/g, "\" : \"");
+                        // label = label.replace(/":(\d)/g, "\" : \1");
+                        label = label.replace(/":(\d)/g, "\" : $1");
+                        console.log(label);
                     }
 
                     if (label != '') {

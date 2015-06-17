@@ -30,20 +30,29 @@
 
 
     .label {
-        width: 200px;
+        /*width: 200px;*/
         /*margin-left: -100px;*/
         position: absolute;
         z-index: 10;
         text-align: left;
-        font-family: Helvetica, sans-serif;
-        font-size: 12px;
-        word-wrap: break-word;
+        margin: 0px;
+        background: #333;
+        opacity: 0.9;
+        padding: 2px;
+        /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+        /*word-wrap: break-word;*/
     }
 
     .labelInner {
-        padding: 2px;
-        background: white;
-        opacity: 0.8;
+        padding: 3px 0px;
+        font-family: Helvetica, sans-serif;
+        font-size: 16px;
+        color: white;
+        opacity: 2.0;
+/*        background: white;
+        opacity: 0.8;*/
+        /*border: 2px solid gold;*/
+        margin: 0px;
     }
 
     </style>
@@ -82,5 +91,36 @@
     });
     </script>
 
+    <style>
+    @media (min-width: 600px) {
+        /* enlarge dat.gui */
+        .dg {
+            font-size: 12pt;
+        }
+        .dg li:not(.folder) {
+            height: 40px;
+            line-height: 40px;
+        }
+        .dg .c .slider {
+            height: 30px;   
+        }
+        .dg .c input[type=text] {
+            font-size: 12pt;
+            height: 24px;   
+        }
+    }
+    @media (max-width: 599px) {
+        /*shrink dat.gui*/
+        .dg.main {
+            font-size: 10pt;
+            margin-top: 50px;
+            width: 200px !important;
+        }
+        .dg.main .close-button {
+            width: 200px !important;
+        }
+    }
+    </style>
+    
   </body>
 </html>

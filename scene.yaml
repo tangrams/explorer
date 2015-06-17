@@ -36,11 +36,11 @@ layers:
                 }
             draw:
                 lines:
-                    order: 3
+                    order: 100
                     color: red
                     width: 3px
                 text:
-                    order: 6
+                    order: 100
                     text_source: name
                     font:
                         typeface: bold 10pt Lucida Grande
@@ -64,16 +64,16 @@ layers:
                 }
             draw:
                 lines:
-                    order: 3
+                    order: 100
                     color: red
                     width: 3px
-                text:
-                    order: 6
-                    text_source: name
-                    font:
-                        typeface: bold 10pt Lucida Grande
-                        fill: white
-                        stroke: { color: black, width: 4 }
+                # text:
+                #     order: 100
+                #     text_source: name
+                #     font:
+                #         typeface: bold 10pt Lucida Grande
+                #         fill: white
+                #         stroke: { color: black, width: 4 }
 
     water:
         data: { source: osm }
@@ -96,11 +96,11 @@ layers:
                 }
             draw:
                 lines:
-                    order: 3
+                    order: 100
                     color: red
                     width: 3px
                 text:
-                    order: 6
+                    order: 100
                     text_source: name
                     font:
                         typeface: bold 10pt Lucida Grande
@@ -125,11 +125,11 @@ layers:
                 }
             draw:
                 lines:
-                    order: 3
+                    order: 100
                     color: red
                     width: 2px
                 text:
-                    order: 6
+                    order: 100
                     text_source: name
                     font:
                         typeface: bold 10pt Lucida Grande
@@ -153,11 +153,11 @@ layers:
                 }
             draw:
                 lines:
-                    order: 3
+                    order: 100
                     color: red
                     width: 3px
                 text:
-                    order: 6
+                    order: 100
                     text_source: name
                     font:
                         typeface: bold 10pt Lucida Grande
@@ -200,11 +200,56 @@ layers:
             draw:
                 points:
                     interactive: true
-                    order: 11
+                    order: 100
                     color: '#c88'
                     size: 10px
                 text:
-                    order: 12
+                    order: 101
+                    text_source: name
+                    font:
+                        fill: red
+
+    landuse_labels-dot-outlines:
+        data: { source: osm, layer: landuse_labels }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            points:
+                order: 10
+                color: black
+                size: 12px
+
+    landuse_labels:
+        data: { source: osm }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            points:
+                interactive: true
+                order: 11
+                color: '#888'
+                size: 8px
+            text:
+                order: 12
+                text_source: name
+                font:
+                    typeface: 8pt Helvetica
+                    fill: '#ccc'
+        red:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                points:
+                    interactive: true
+                    order: 100
+                    color: '#c88'
+                    size: 10px
+                text:
+                    order: 100
                     text_source: name
                     font:
                         fill: red
