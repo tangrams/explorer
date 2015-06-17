@@ -19,8 +19,10 @@ map = (function () {
     // leaflet-style URL hash pattern:
     // #[zoom],[lat],[lng]
     var url_hash = window.location.hash.slice(1, window.location.hash.length).split('/');
-    var keytext = "kind";
-    var valuetext = "major_road";
+    keytext = "kind";
+    window.keytext = keytext;
+    valuetext = "major_road";
+    window.valuetext = valuetext;
 
     if (url_hash.length >= 3) {
         map_start_location = [url_hash[1],url_hash[2], url_hash[0]];
@@ -34,7 +36,9 @@ map = (function () {
     }
 
     // Put current state on URL
-    function updateURL () {
+    window.updateURL = function() {
+        // if (picking) return;
+        // console.log(window.location.hash);
         var map_latlng = map.getCenter();
         var url_options = [map.getZoom().toFixed(1), map_latlng.lat.toFixed(4), map_latlng.lng.toFixed(4), escape(keytext), escape(valuetext)];
         window.location.hash = url_options.join('/');
@@ -69,6 +73,30 @@ map = (function () {
 
     // var hash = new L.Hash(map);
 
+    function updateKey(value) {
+        keytext = value;
+
+        for (layer in scene.config.layers) {
+            if (layer == "earth") continue;
+            scene.config.layers[layer].properties.key_text = value;
+        }
+        scene.rebuildGeometry();
+        scene.requestRedraw();
+        updateURL(); 
+    }
+
+    function updateValue(value) {
+        valuetext = value;
+
+        for (layer in scene.config.layers) {
+            if (layer == "earth") continue;
+            scene.config.layers[layer].properties.value_text = value;
+        }
+        scene.rebuildGeometry();
+        scene.requestRedraw();
+        updateURL();            
+    }
+
     // Create dat GUI
     var gui = new dat.GUI({ autoPlace: true, hideable: false, width: 300 });
     function addGUI () {
@@ -78,31 +106,10 @@ map = (function () {
 
         gui.keyinput = keytext;
         var keyinput = gui.add(gui, 'keyinput').name("key").listen();
-        function updateKey(value) {
-            keytext = value;
-
-            for (layer in scene.config.layers) {
-                if (layer == "earth") continue;
-                scene.config.layers[layer].properties.key_text = value;
-            }
-            scene.rebuildGeometry();
-            scene.requestRedraw();
-            updateURL(); 
-        }
 
         gui.valueinput = valuetext;
         var valueinput = gui.add(gui, 'valueinput').name("value").listen();
-        function updateValue(value) {
-            valuetext = value;
-
-            for (layer in scene.config.layers) {
-                if (layer == "earth") continue;
-                scene.config.layers[layer].properties.value_text = value;
-            }
-            scene.rebuildGeometry();
-            scene.requestRedraw();
-            updateURL();            
-        }
+        
         updateKey(keytext);
         updateValue(valuetext);
         keyinput.onChange(function(value) {
@@ -183,13 +190,23 @@ map = (function () {
         scene.container.addEventListener('click', function (event) {
             picking = !picking;
         });
+        // toggle popup picking state
+        scene.container.addEventListener('drag', function (event) {
+            picking = false;
+        });
     }
 
     window.setValuesFromSpan = function(span) {
+        keytext = span.getAttribute("key");
+        valuetext = span.getAttribute("value");
         gui.keytext=span.getAttribute("key");
         gui.keyinput=span.getAttribute("key");
         gui.valuetext=span.getAttribute("value");
         gui.valueinput=span.getAttribute("value");
+        updateKey(keytext);
+        updateValue(valuetext);
+        // scene.rebuildGeometry();
+        // scene.requestRedraw();
         updateURL();
     }
 
