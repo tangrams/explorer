@@ -12,7 +12,7 @@ map = (function () {
         'Seattle': [47.5937, -122.3215, 15]
     };
 
-    var map_start_location = locations['Oakland'];
+    var map_start_location = locations['New York'];
 
     /*** URL parsing ***/
 
