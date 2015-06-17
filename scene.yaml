@@ -43,9 +43,9 @@ layers:
                     order: 100
                     text_source: name
                     font:
-                        typeface: bold 10pt Lucida Grande
+                        typeface: 8pt Lucida Grande
                         fill: white
-                        stroke: { color: black, width: 4 }
+                        # stroke: { color: black, width: 4 }
 
     landuse:
         data: { source: osm }
@@ -71,7 +71,7 @@ layers:
                 #     order: 100
                 #     text_source: name
                 #     font:
-                #         typeface: bold 10pt Lucida Grande
+                #         typeface: 8pt Lucida Grande
                 #         fill: white
                 #         stroke: { color: black, width: 4 }
 
@@ -103,9 +103,9 @@ layers:
                     order: 100
                     text_source: name
                     font:
-                        typeface: bold 10pt Lucida Grande
+                        typeface: 8pt Lucida Grande
                         fill: white
-                        stroke: { color: black, width: 4 }
+                        # stroke: { color: black, width: 4 }
 
     roads:
         data: { source: osm }
@@ -132,9 +132,9 @@ layers:
                     order: 100
                     text_source: name
                     font:
-                        typeface: bold 10pt Lucida Grande
+                        typeface: 8pt Lucida Grande
                         fill: white
-                        stroke: { color: black, width: 4 }
+                        # stroke: { color: black, width: 4 }
 
     buildings:
         data: { source: osm }
@@ -160,9 +160,9 @@ layers:
                     order: 100
                     text_source: name
                     font:
-                        typeface: bold 10pt Lucida Grande
+                        typeface: 8pt Lucida Grande
                         fill: white
-                        stroke: { color: black, width: 4 }
+                        # stroke: { color: black, width: 4 }
 
     places-dot-outlines:
         data: { source: osm, layer: places }

@@ -21,10 +21,28 @@ map = (function () {
     var keytext = "kind";
     var valuetext = "major_road";
 
-    if (url_hash.length == 3) {
+    if (url_hash.length >= 3) {
         map_start_location = [url_hash[1],url_hash[2], url_hash[0]];
         // convert from strings
         map_start_location = map_start_location.map(Number);
+    }
+
+    if (url_hash.length == 5) {
+        keytext = unescape(url_hash[3]);
+        valuetext = unescape(url_hash[4]);
+    }
+
+    // Put current state on URL
+    function updateURL () {
+        console.log('t');
+        var map_latlng = map.getCenter();
+        var url_options = [map.getZoom().toFixed(1), map_latlng.lat.toFixed(4), map_latlng.lng.toFixed(4), escape(keytext), escape(valuetext)];
+        window.location.hash = url_options.join('/');
+    }
+
+    function updateHash () {
+        newhash = hash.lastHash + "/"+scene.config.layers["roads"].properties.key_text + "/"+scene.config.layers["roads"].properties.value_text;
+        if (window.location != newhash) window.location = newhash
     }
 
     /*** Map ***/
@@ -47,8 +65,9 @@ map = (function () {
 
     // setView expects format ([lat, long], zoom)
     map.setView(map_start_location.slice(0, 3), map_start_location[2]);
+    map.on('moveend', updateURL);
 
-    var hash = new L.Hash(map);
+    // var hash = new L.Hash(map);
 
     // Create dat GUI
     var gui = new dat.GUI({ autoPlace: true, hideable: false, width: 300 });
@@ -61,28 +80,28 @@ map = (function () {
         var keyinput = gui.add(gui, 'keyinput').name("key");
         function updateKey(value) {
             keytext = value;
-            if (value == "") value = "willdefinitelynotmatch";
+
             for (layer in scene.config.layers) {
                 if (layer == "earth") continue;
                 scene.config.layers[layer].properties.key_text = value;
             }
             scene.rebuildGeometry();
             scene.requestRedraw();
-            //updateURL(); 
+            updateURL(); 
         }
 
         gui.valueinput = valuetext;
         var valueinput = gui.add(gui, 'valueinput').name("value");
         function updateValue(value) {
             valuetext = value;
-            // if (value == "") value = "willdefinitelynotmatch";
+
             for (layer in scene.config.layers) {
                 if (layer == "earth") continue;
                 scene.config.layers[layer].properties.value_text = value;
             }
             scene.rebuildGeometry();
             scene.requestRedraw();
-            //updateURL();            
+            updateURL();            
         }
         updateKey(keytext);
         updateValue(valuetext);
