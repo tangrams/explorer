@@ -1,6 +1,7 @@
 /*jslint browser: true*/
 /*global Tangram, gui */
 
+var picking = false;
 map = (function () {
 // (function () {
     // 'use strict';
@@ -39,10 +40,10 @@ map = (function () {
         window.location.hash = url_options.join('/');
     }
 
-    function updateHash () {
-        newhash = hash.lastHash + "/"+scene.config.layers["roads"].properties.key_text + "/"+scene.config.layers["roads"].properties.value_text;
-        if (window.location != newhash) window.location = newhash
-    }
+    // function updateHash () {
+    //     newhash = hash.lastHash + "/"+scene.config.layers["roads"].properties.key_text + "/"+scene.config.layers["roads"].properties.value_text;
+    //     if (window.location != newhash) window.location = newhash
+    // }
 
     /*** Map ***/
 
@@ -76,7 +77,7 @@ map = (function () {
         window.gui = gui;
 
         gui.keyinput = keytext;
-        var keyinput = gui.add(gui, 'keyinput').name("key");
+        var keyinput = gui.add(gui, 'keyinput').name("key").listen();
         function updateKey(value) {
             keytext = value;
 
@@ -90,7 +91,7 @@ map = (function () {
         }
 
         gui.valueinput = valuetext;
-        var valueinput = gui.add(gui, 'valueinput').name("value");
+        var valueinput = gui.add(gui, 'valueinput').name("value").listen();
         function updateValue(value) {
             valuetext = value;
 
@@ -117,6 +118,7 @@ map = (function () {
         valueinput.domElement.onclick = function() { this.getElementsByTagName('input')[0].select(); };
     }
 
+    // var scene.picking = false;
     // Feature selection
     function initFeatureSelection () {
         // Selection info shown on hover
@@ -127,6 +129,7 @@ map = (function () {
 
         // Show selected feature on hover
         scene.container.addEventListener('mousemove', function (event) {
+            if (picking) return;
             var pixel = { x: event.clientX, y: event.clientY };
 
             scene.getFeatureAt(pixel).then(function(selection) {    
@@ -139,11 +142,13 @@ map = (function () {
 
                     var label = '';
                     if (feature.properties != null) {
-                        label = JSON.stringify(feature.properties);
-                        label = label.replace(/[{}]/g, "");
-                        label = label.replace(/,"/g, "<br>\"");
-                        label = label.replace(/":"/g, "\" : \"");
-                        label = label.replace(/":(\d)/g, "\" : $1");
+                        // console.log(feature.properties);
+                        var obj = JSON.parse(JSON.stringify(feature.properties));
+                        label = "";
+                        for (x in feature.properties) {
+                            val = feature.properties[x]
+                            label += "<span class='labelLine' key="+x+" value="+val+" onclick='setValuesFromSpan(this)'>"+x+" : "+val+"</span><br>"
+                        }
                     }
 
                     if (label != '') {
@@ -168,6 +173,24 @@ map = (function () {
                 }
             }
         });
+
+        // capture popup clicks
+        // scene.labelLine.addEventListener('click', function (event) {
+        //     return true;
+        // });
+
+        // toggle popup picking state
+        scene.container.addEventListener('click', function (event) {
+            picking = !picking;
+        });
+    }
+
+    window.setValuesFromSpan = function(span) {
+        gui.keytext=span.getAttribute("key");
+        gui.keyinput=span.getAttribute("key");
+        gui.valuetext=span.getAttribute("value");
+        gui.valueinput=span.getAttribute("value");
+        updateURL();
     }
 
     // Add map
