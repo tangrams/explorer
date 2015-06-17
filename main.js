@@ -34,7 +34,6 @@ map = (function () {
 
     // Put current state on URL
     function updateURL () {
-        console.log('t');
         var map_latlng = map.getCenter();
         var url_options = [map.getZoom().toFixed(1), map_latlng.lat.toFixed(4), map_latlng.lng.toFixed(4), escape(keytext), escape(valuetext)];
         window.location.hash = url_options.join('/');
@@ -144,9 +143,7 @@ map = (function () {
                         label = label.replace(/[{}]/g, "");
                         label = label.replace(/,"/g, "<br>\"");
                         label = label.replace(/":"/g, "\" : \"");
-                        // label = label.replace(/":(\d)/g, "\" : \1");
                         label = label.replace(/":(\d)/g, "\" : $1");
-                        console.log(label);
                     }
 
                     if (label != '') {
