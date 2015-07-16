@@ -274,47 +274,120 @@ layers:
                     font:
                         fill: red
 
-    # landuse_labels-dot-outlines:
-    #     data: { source: osm, layer: landuse_labels }
-    #     properties: 
-    #         key_text: ""
-    #         value_text: ""
-    #     draw:
-    #         points:
-    #             order: 10
-    #             color: black
-    #             size: 12px
+    poi_labels-dot-outlines:
+        data: { source: osm, layer: pois }
+        filter: { $zoom: { min: 15 } }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            points:
+                order: 10
+                color: black
+                size: 12px
 
-    # landuse_labels:
-    #     data: { source: osm }
-    #     properties: 
-    #         key_text: ""
-    #         value_text: ""
-    #     draw:
-    #         points:
-    #             interactive: true
-    #             order: 11
-    #             color: '#888'
-    #             size: 8px
-    #         text:
-    #             order: 12
-    #             text_source: name
-    #             font:
-    #                 typeface: 8pt Helvetica
-    #                 fill: '#ccc'
-    #     red:
-    #         filter: |
-    #             function () {
-    #                 return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-    #             }
-    #         draw:
-    #             points:
-    #                 interactive: true
-    #                 order: 100
-    #                 color: '#c88'
-    #                 size: 10px
-    #             text:
-    #                 order: 100
-    #                 text_source: name
-    #                 font:
-    #                     fill: red
+
+    poi_labels:
+        data: { source: osm, layer: pois }
+        filter: { $zoom: { min: 15 } }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            points:
+                interactive: true
+                order: 11
+                color: '#888'
+                size: 8px
+            text:
+                order: 12
+                text_source: name
+                font:
+                    typeface: 8pt Helvetica
+                    fill: '#ccc'
+        red:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                points:
+                    interactive: true
+                    order: 100
+                    color: '#c88'
+                    size: 10px
+                text:
+                    order: 100
+                    text_source: name
+                    font:
+                        fill: red
+
+
+    landuse_labels-dot-outlines:
+        data: { source: osm, layer: landuse_labels }
+        filter: 
+            any:
+                # show labels for smaller landuse areas at higher zooms
+                - { $zoom: { min: 9 },  area: { min: 100000000 } }
+                - { $zoom: { min: 10 }, area: { min: 100000000 } }
+                - { $zoom: { min: 11 }, area: { min: 25000000 } }
+                - { $zoom: { min: 12 }, area: { min: 5000000 } }
+                - { $zoom: { min: 13 }, area: { min: 2000000 } }
+                - { $zoom: { min: 14 }, area: { min: 100000 } }
+                - { $zoom: { min: 15 }, area: { min: 50000 } }
+                - { $zoom: { min: 15 }, area: { min: 10000 } }
+                - { $zoom: { min: 18 } }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            points:
+                order: 10
+                color: black
+                size: 12px
+
+    landuse_labels:
+        data: { source: osm }
+        filter: 
+            any:
+                # show labels for smaller landuse areas at higher zooms
+                - { $zoom: { min: 9 },  area: { min: 100000000 } }
+                - { $zoom: { min: 10 }, area: { min: 100000000 } }
+                - { $zoom: { min: 11 }, area: { min: 25000000 } }
+                - { $zoom: { min: 12 }, area: { min: 5000000 } }
+                - { $zoom: { min: 13 }, area: { min: 2000000 } }
+                - { $zoom: { min: 14 }, area: { min: 100000 } }
+                - { $zoom: { min: 15 }, area: { min: 50000 } }
+                - { $zoom: { min: 15 }, area: { min: 10000 } }
+                - { $zoom: { min: 18 } }
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            points:
+                interactive: true
+                order: 11
+                color: '#888'
+                size: 8px
+            text:
+                order: 12
+                text_source: name
+                font:
+                    typeface: 8pt Helvetica
+                    fill: '#ccc'
+        red:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                points:
+                    interactive: true
+                    order: 100
+                    color: '#c88'
+                    size: 10px
+                text:
+                    order: 100
+                    text_source: name
+                    font:
+                        fill: red
