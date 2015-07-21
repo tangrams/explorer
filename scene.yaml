@@ -201,6 +201,35 @@ layers:
                         fill: white
                         # stroke: { color: black, width: 4 }
 
+    transit:
+        data: { source: osm }
+        properties:
+            key_text: ""
+            value_text: ""
+        draw:
+            lines:
+                interactive: true
+                order: 2
+                color: '#bbb'
+                width: 2px
+        red:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                lines:
+                    order: 100
+                    color: red
+                    width: 2px
+                text:
+                    order: 100
+                    text_source: name
+                    font:
+                        typeface: 8pt Lucida Grande
+                        fill: white
+                        # stroke: { color: black, width: 4 }
+
     buildings:
         data: { source: osm }
         properties: 
