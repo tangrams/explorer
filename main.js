@@ -96,7 +96,7 @@ map = (function () {
     var gui = new dat.GUI({ autoPlace: true, hideable: false, width: 300 });
     function addGUI () {
 
-        gui.domElement.parentNode.style.zIndex = 5; // make sure GUI is on top of map
+        gui.domElement.parentNode.style.zIndex = 2000; // make sure GUI is on top of map
         window.gui = gui;
 
         gui.keyinput = keytext;
@@ -130,7 +130,7 @@ map = (function () {
         selection_info.style.zindex = 1000;
 
         // Show selected feature on hover
-        scene.container.addEventListener('mousemove', function (event) {
+        map.getContainer().addEventListener('mousemove', function (event) {
             if (picking) return;
             var pixel = { x: event.clientX, y: event.clientY };
 
@@ -157,7 +157,7 @@ map = (function () {
                         selection_info.style.left = (pixel.x + 5) + 'px';
                         selection_info.style.top = (pixel.y + 15) + 'px';
                         selection_info.innerHTML = '<span class="labelInner">' + label + '</span>';
-                        scene.container.appendChild(selection_info);
+                        map.getContainer().appendChild(selection_info);
                     }
                     else if (selection_info.parentNode != null) {
                         selection_info.parentNode.removeChild(selection_info);
@@ -182,11 +182,11 @@ map = (function () {
         // });
 
         // toggle popup picking state
-        scene.container.addEventListener('click', function (event) {
+        map.getContainer().addEventListener('click', function (event) {
             picking = !picking;
         });
         // toggle popup picking state
-        scene.container.addEventListener('drag', function (event) {
+        map.getContainer().addEventListener('drag', function (event) {
             picking = false;
         });
     }
