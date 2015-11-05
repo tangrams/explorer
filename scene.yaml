@@ -49,7 +49,8 @@ layers:
                     order: 100
                     text_source: name
                     font:
-                        typeface: 8pt Lucida Grande
+                        size: 8pt
+                        family: Lucida Grande
                         fill: white
                         # stroke: { color: black, width: 4 }
 
@@ -77,7 +78,8 @@ layers:
                     order: 100
                     text_source: name
                     font:
-                        typeface: 8pt Lucida Grande
+                        size: 8pt
+                        family: Lucida Grande
                         fill: white
                         stroke: { color: black, width: 4 }
 
@@ -109,7 +111,8 @@ layers:
                     order: 100
                     text_source: name
                     font:
-                        typeface: 8pt Lucida Grande
+                        size: 8pt
+                        family: Lucida Grande
                         fill: white
                         # stroke: { color: black, width: 4 }
 
@@ -131,7 +134,8 @@ layers:
         #         order: 2
         #         text_source: route_name
         #         font:
-        #             typeface: 10px Helvetica
+        #             size: 10px
+        family: Helvetica
         #             fill: white
         # blue:
         #     filter: { ref: [A, C, E] }
@@ -173,7 +177,8 @@ layers:
         #             order: 100
         #             text_source: name
         #             font:
-        #                 typeface: 8pt Lucida Grande
+        #                 size: 8pt
+        family: Lucida Grande
         #                 fill: white
 
     roads:
@@ -201,7 +206,8 @@ layers:
                     order: 100
                     text_source: name
                     font:
-                        typeface: 8pt Lucida Grande
+                        size: 8pt
+                        family: Lucida Grande
                         fill: white
                         # stroke: { color: black, width: 4 }
 
@@ -230,7 +236,8 @@ layers:
                     order: 100
                     text_source: name
                     font:
-                        typeface: 8pt Lucida Grande
+                        size: 8pt
+                        family: Lucida Grande
                         fill: white
                         # stroke: { color: black, width: 4 }
 
@@ -258,7 +265,8 @@ layers:
                     order: 100
                     text_source: name
                     font:
-                        typeface: 8pt Lucida Grande
+                        size: 8pt
+                        family: Lucida Grande
                         fill: white
                         # stroke: { color: black, width: 4 }
 
@@ -288,7 +296,8 @@ layers:
                 order: 12
                 text_source: name
                 font:
-                    typeface: 8pt Helvetica
+                    size: 8pt
+                    family: Helvetica
                     fill: '#ccc'
         red:
             filter: |
@@ -336,7 +345,8 @@ layers:
                 order: 12
                 text_source: name
                 font:
-                    typeface: 8pt Helvetica
+                    size: 8pt
+                    family: Helvetica
                     fill: '#ccc'
         red:
             filter: |
@@ -406,7 +416,8 @@ layers:
                 order: 12
                 text_source: name
                 font:
-                    typeface: 8pt Helvetica
+                    size: 8pt
+                    family: Helvetica
                     fill: '#ccc'
         red:
             filter: |
