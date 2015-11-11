@@ -6,13 +6,7 @@ map = (function () {
 // (function () {
     // 'use strict';
 
-    var locations = {
-        'Oakland': [37.8044, -122.2708, 15],
-        'New York': [40.70531887544228, -74.00976419448853, 15],
-        'Seattle': [47.5937, -122.3215, 15]
-    };
-
-    var map_start_location = locations['New York'];
+    var map_start_location = [40.7238, -73.9881, 14]; // NYC
 
     /*** URL parsing ***/
 
