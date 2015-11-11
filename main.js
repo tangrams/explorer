@@ -142,8 +142,8 @@ map = (function () {
                         var obj = JSON.parse(JSON.stringify(feature.properties));
                         label = "";
                         for (x in feature.properties) {
-                            val = feature.properties[x]
-                            label += "<span class='labelLine' key="+x+" value="+val+" onclick='setValuesFromSpan(this)'>"+x+" : "+val+"</span><br>"
+                            val = feature.properties[x];
+                            label += "<span class='labelLine' key='"+x+"' value='"+val+"' onclick='setValuesFromSpan(this)'>"+x+" : "+val+"</span><br>";
                         }
                     }
 
