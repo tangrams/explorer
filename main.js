@@ -31,17 +31,10 @@ map = (function () {
 
     // Put current state on URL
     window.updateURL = function() {
-        // if (picking) return;
-        // console.log(window.location.hash);
         var map_latlng = map.getCenter();
         var url_options = [map.getZoom().toFixed(1), map_latlng.lat.toFixed(4), map_latlng.lng.toFixed(4), escape(keytext), escape(valuetext)];
         window.location.hash = url_options.join('/');
     }
-
-    // function updateHash () {
-    //     newhash = hash.lastHash + "/"+scene.config.layers["roads"].properties.key_text + "/"+scene.config.layers["roads"].properties.value_text;
-    //     if (window.location != newhash) window.location = newhash
-    // }
 
     /*** Map ***/
 
@@ -61,8 +54,6 @@ map = (function () {
     // setView expects format ([lat, long], zoom)
     map.setView(map_start_location.slice(0, 3), map_start_location[2]);
     map.on('moveend', updateURL);
-
-    // var hash = new L.Hash(map);
 
     function updateKey(value) {
         keytext = value;
@@ -114,7 +105,6 @@ map = (function () {
         valueinput.domElement.onclick = function() { this.getElementsByTagName('input')[0].select(); };
     }
 
-    // var scene.picking = false;
     // Feature selection
     function initFeatureSelection () {
         // Selection info shown on hover
@@ -170,11 +160,6 @@ map = (function () {
             }
         });
 
-        // capture popup clicks
-        // scene.labelLine.addEventListener('click', function (event) {
-        //     return true;
-        // });
-
         // toggle popup picking state
         map.getContainer().addEventListener('click', function (event) {
             picking = !picking;
@@ -194,8 +179,6 @@ map = (function () {
         gui.valueinput=span.getAttribute("value");
         updateKey(keytext);
         updateValue(valuetext);
-        // scene.rebuildGeometry();
-        // scene.requestRedraw();
         updateURL();
     }
 
