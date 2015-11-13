@@ -116,70 +116,70 @@ layers:
                         fill: white
                         # stroke: { color: black, width: 4 }
 
-    # routes:
-    #     data: { source: osm }
-        # filter:
-            # route: subway
-            # operator: Metropolitan Transportation Authority
-        # properties: 
-        #     key_text: ""
-        #     value_text: ""
-        # draw:
-        #     lines:
-        #         interactive: true
-        #         order: 2
-        #         color: '#bbb'
-        #         width: 4px
-        #     text:
-        #         order: 2
-        #         text_source: route_name
-        #         font:
-        #             size: 10px
-        family: Helvetica
-        #             fill: white
-        # blue:
-        #     filter: { ref: [A, C, E] }
-        #     draw:
-        #         lines:
-        #             color: blue
-        # orange:
-        #     filter: { ref: [B, D, F, M] }
-        #     draw:
-        #         lines:
-        #             color: orange
-        # yellow:
-        #     filter: { ref: [N, R, Q, J] }
-        #     draw:
-        #         lines:
-        #             color: yellow
-        # red:
-        #     filter: { ref: ["1", "2", "3"] }
-        #     draw:
-        #         lines:
-        #             color: red
-        # green:
-        #     filter: { ref: ["4" , "5", "6"] }
-        #     draw:
-        #         lines:
-        #             color: green
-        # match:
-        #     filter: |
-        #         function () {
-        #             return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-        #         }
-        #     draw:
-        #         lines:
-        #             interactive: true
-        #             order: 100
-        #             color: red
-        #             width: 4px
-        #         text:
-        #             order: 100
-        #             text_source: name
-        #             font:
-        #                 size: 8pt
-        family: Lucida Grande
-        #                 fill: white
+    routes:
+        data: { source: osm }
+        filter:
+            route: subway
+            operator: Metropolitan Transportation Authority
+        properties: 
+            key_text: ""
+            value_text: ""
+        draw:
+            lines:
+                interactive: true
+                order: 2
+                color: '#bbb'
+                width: 4px
+            text:
+                order: 2
+                text_source: route_name
+                font:
+                    size: 10px
+                    family: Helvetica
+                    fill: white
+        blue:
+            filter: { ref: [A, C, E] }
+            draw:
+                lines:
+                    color: blue
+        orange:
+            filter: { ref: [B, D, F, M] }
+            draw:
+                lines:
+                    color: orange
+        yellow:
+            filter: { ref: [N, R, Q, J] }
+            draw:
+                lines:
+                    color: yellow
+        red:
+            filter: { ref: ["1", "2", "3"] }
+            draw:
+                lines:
+                    color: red
+        green:
+            filter: { ref: ["4" , "5", "6"] }
+            draw:
+                lines:
+                    color: green
+        match:
+            filter: |
+                function () {
+                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                }
+            draw:
+                lines:
+                    interactive: true
+                    order: 100
+                    color: red
+                    width: 4px
+                text:
+                    order: 100
+                    text_source: name
+                    font:
+                        size: 8pt
+                        family: Lucida Grande
+                        fill: white
 
     roads:
         data: { source: osm }
