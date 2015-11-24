@@ -38,7 +38,7 @@ layers:
         red:
             filter: |
                 function () {
-                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
                 lines:
@@ -67,7 +67,7 @@ layers:
         red:
             filter: |
                 function () {
-                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
                 lines:
@@ -100,7 +100,7 @@ layers:
         red:
             filter: |
                 function () {
-                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
                 lines:
@@ -165,7 +165,7 @@ layers:
         match:
             filter: |
                 function () {
-                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
                 lines:
@@ -195,7 +195,7 @@ layers:
         red:
             filter: |
                 function () {
-                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
                 lines:
@@ -225,7 +225,7 @@ layers:
         red:
             filter: |
                 function () {
-                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
                 lines:
@@ -254,7 +254,7 @@ layers:
         red:
             filter: |
                 function () {
-                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
                 lines:
@@ -302,7 +302,7 @@ layers:
         red:
             filter: |
                 function () {
-                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
                 points:
@@ -351,7 +351,7 @@ layers:
         red:
             filter: |
                 function () {
-                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
                 points:
@@ -422,7 +422,7 @@ layers:
         red:
             filter: |
                 function () {
-                    return feature[properties.key_text] && feature[properties.key_text].toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
+                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
                 }
             draw:
                 points:
