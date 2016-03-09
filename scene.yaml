@@ -33,7 +33,7 @@ layers:
         draw:
             polygons:
                 interactive: true
-                order: 0
+                order: function() { return feature.sort_key; }
                 color: [.5, .5, .5]
         red:
             filter: |
@@ -42,11 +42,10 @@ layers:
                 }
             draw:
                 lines:
-                    order: 100
+                    order: 1000
                     color: red
                     width: 3px
                 text:
-                    order: 100
                     text_source: name
                     font:
                         size: 8pt
@@ -62,7 +61,7 @@ layers:
         draw:
             polygons:
                 interactive: true
-                order: 1
+                order: function() { return feature.sort_key; }
                 color: [.6, .6, .6]
         red:
             filter: |
@@ -71,11 +70,10 @@ layers:
                 }
             draw:
                 lines:
-                    order: 100
+                    order: 1000
                     color: red
                     width: 3px
                 text:
-                    order: 100
                     text_source: name
                     font:
                         size: 8pt
@@ -91,10 +89,10 @@ layers:
         draw:
             polygons:
                 interactive: true
-                order: 2
+                order: function() { return feature.sort_key; }
                 color: [.4, .4, .4]
             lines:
-                order: 3
+                order: function() { return feature.sort_key; }
                 color: [.5, .5, .5]
                 width: 1px
         red:
@@ -104,11 +102,10 @@ layers:
                 }
             draw:
                 lines:
-                    order: 100
+                    order: 1000
                     color: red
                     width: 3px
                 text:
-                    order: 100
                     text_source: name
                     font:
                         size: 8pt
@@ -127,11 +124,10 @@ layers:
         draw:
             lines:
                 interactive: true
-                order: 2
+                order: function() { return feature.sort_key; }
                 color: '#bbb'
                 width: 4px
             text:
-                order: 2
                 text_source: route_name
                 font:
                     size: 10px
@@ -170,11 +166,10 @@ layers:
             draw:
                 lines:
                     interactive: true
-                    order: 100
+                    order: 1000
                     color: red
                     width: 4px
                 text:
-                    order: 100
                     text_source: name
                     font:
                         size: 8pt
@@ -189,7 +184,7 @@ layers:
         draw:
             lines:
                 interactive: true
-                order: 2
+                order: function() { return feature.sort_key; }
                 color: '#bbb'
                 width: 1px
         red:
@@ -199,11 +194,10 @@ layers:
                 }
             draw:
                 lines:
-                    order: 100
+                    order: 1000
                     color: red
                     width: 2px
                 text:
-                    order: 100
                     text_source: name
                     font:
                         size: 8pt
@@ -219,7 +213,7 @@ layers:
         draw:
             lines:
                 interactive: true
-                order: 2
+                order: function() { return feature.sort_key; }
                 color: '#bbb'
                 width: 2px
         red:
@@ -229,11 +223,10 @@ layers:
                 }
             draw:
                 lines:
-                    order: 100
+                    order: 1000
                     color: red
                     width: 2px
                 text:
-                    order: 100
                     text_source: name
                     font:
                         size: 8pt
@@ -249,7 +242,7 @@ layers:
         draw:
             polygons:
                 interactive: true
-                order: 4
+                order: function() { return feature.sort_key; }
                 color: '#888'
         red:
             filter: |
@@ -258,11 +251,10 @@ layers:
                 }
             draw:
                 lines:
-                    order: 100
+                    order: 1000
                     color: red
                     width: 3px
                 text:
-                    order: 100
                     text_source: name
                     font:
                         size: 8pt
@@ -277,7 +269,7 @@ layers:
             value_text: ""
         draw:
             points:
-                order: 10
+                order: function() { return feature.sort_key; }
                 color: black
                 size: 14px
 
@@ -289,11 +281,10 @@ layers:
         draw:
             points:
                 interactive: true
-                order: 11
+                order: function() { return feature.sort_key; }
                 color: '#888'
                 size: 10px
             text:
-                order: 12
                 text_source: name
                 font:
                     size: 8pt
@@ -307,11 +298,10 @@ layers:
             draw:
                 points:
                     interactive: true
-                    order: 100
+                    order: 1000
                     color: '#c88'
                     size: 10px
                 text:
-                    order: 101
                     text_source: name
                     font:
                         fill: red
@@ -324,7 +314,7 @@ layers:
             value_text: ""
         draw:
             points:
-                order: 10
+                order: function() { return feature.sort_key; }
                 color: black
                 size: 12px
 
@@ -338,11 +328,10 @@ layers:
         draw:
             points:
                 interactive: true
-                order: 11
+                order: function() { return feature.sort_key; }
                 color: '#888'
                 size: 8px
             text:
-                order: 12
                 text_source: name
                 font:
                     size: 8pt
@@ -356,11 +345,10 @@ layers:
             draw:
                 points:
                     interactive: true
-                    order: 100
+                    order: 1000
                     color: '#c88'
                     size: 10px
                 text:
-                    order: 100
                     text_source: name
                     font:
                         fill: red
@@ -385,7 +373,7 @@ layers:
             value_text: ""
         draw:
             points:
-                order: 10
+                order: function() { return feature.sort_key; }
                 color: black
                 size: 12px
 
@@ -409,11 +397,10 @@ layers:
         draw:
             points:
                 interactive: true
-                order: 11
+                order: function() { return feature.sort_key; }
                 color: '#888'
                 size: 8px
             text:
-                order: 12
                 text_source: name
                 font:
                     size: 8pt
@@ -427,11 +414,10 @@ layers:
             draw:
                 points:
                     interactive: true
-                    order: 100
+                    order: 1000
                     color: '#c88'
                     size: 10px
                 text:
-                    order: 100
                     text_source: name
                     font:
                         fill: red
