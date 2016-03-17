@@ -269,6 +269,7 @@ layers:
             value_text: ""
         draw:
             points:
+                interactive: true
                 order: function() { return feature.sort_key; }
                 color: black
                 size: 14px
@@ -314,6 +315,7 @@ layers:
             value_text: ""
         draw:
             points:
+                interactive: true
                 order: function() { return feature.sort_key; }
                 color: black
                 size: 12px
@@ -373,6 +375,7 @@ layers:
             value_text: ""
         draw:
             points:
+                interactive: true
                 order: function() { return feature.sort_key; }
                 color: black
                 size: 12px
