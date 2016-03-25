@@ -1,3 +1,12 @@
+global:
+    key_text: ""
+    value_text: ""
+    filter: |
+        function () {
+            return global.key_text && global.value_text &&
+                String(feature[global.key_text]).toLowerCase().indexOf(global.value_text.toLowerCase()) > -1;
+        }
+
 scene:
     background:
         color: [.4, .4, .4]
@@ -27,19 +36,13 @@ sources:
 layers:
     earth:
         data: { source: osm }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             polygons:
                 interactive: true
                 order: function() { return feature.sort_key; }
                 color: [.5, .5, .5]
         red:
-            filter: |
-                function () {
-                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-                }
+            filter: global.filter
             draw:
                 lines:
                     order: 1000
@@ -51,23 +54,17 @@ layers:
                         size: 8pt
                         family: Lucida Grande
                         fill: white
-                        # stroke: { color: black, width: 4 }
+                        stroke: { color: black, width: 4 }
 
     landuse:
         data: { source: osm }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             polygons:
                 interactive: true
                 order: function() { return feature.sort_key; }
                 color: [.6, .6, .6]
         red:
-            filter: |
-                function () {
-                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-                }
+            filter: global.filter
             draw:
                 lines:
                     order: 1000
@@ -83,9 +80,6 @@ layers:
 
     water:
         data: { source: osm }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             polygons:
                 interactive: true
@@ -96,10 +90,7 @@ layers:
                 color: [.5, .5, .5]
                 width: 1px
         red:
-            filter: |
-                function () {
-                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-                }
+            filter: global.filter
             draw:
                 lines:
                     order: 1000
@@ -118,9 +109,6 @@ layers:
         filter:
             route: subway
             operator: Metropolitan Transportation Authority
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             lines:
                 interactive: true
@@ -159,10 +147,7 @@ layers:
                 lines:
                     color: green
         match:
-            filter: |
-                function () {
-                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-                }
+            filter: global.filter
             draw:
                 lines:
                     interactive: true
@@ -178,9 +163,6 @@ layers:
 
     roads:
         data: { source: osm }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             lines:
                 interactive: true
@@ -188,10 +170,7 @@ layers:
                 color: '#bbb'
                 width: 1px
         red:
-            filter: |
-                function () {
-                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-                }
+            filter: global.filter
             draw:
                 lines:
                     order: 1000
@@ -207,9 +186,6 @@ layers:
 
     transit:
         data: { source: osm }
-        properties:
-            key_text: ""
-            value_text: ""
         draw:
             lines:
                 interactive: true
@@ -217,10 +193,7 @@ layers:
                 color: '#bbb'
                 width: 2px
         red:
-            filter: |
-                function () {
-                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-                }
+            filter: global.filter
             draw:
                 lines:
                     order: 1000
@@ -236,19 +209,13 @@ layers:
 
     buildings:
         data: { source: osm }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             polygons:
                 interactive: true
                 order: function() { return feature.sort_key; }
                 color: '#888'
         red:
-            filter: |
-                function () {
-                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-                }
+            filter: global.filter
             draw:
                 lines:
                     order: 1000
@@ -264,9 +231,6 @@ layers:
 
     places-dot-outlines:
         data: { source: osm, layer: places }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             points:
                 interactive: true
@@ -276,9 +240,6 @@ layers:
 
     places:
         data: { source: osm }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             points:
                 interactive: true
@@ -292,10 +253,7 @@ layers:
                     family: Helvetica
                     fill: '#ccc'
         red:
-            filter: |
-                function () {
-                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-                }
+            filter: global.filter
             draw:
                 points:
                     interactive: true
@@ -310,9 +268,6 @@ layers:
     poi_labels-dot-outlines:
         data: { source: osm, layer: pois }
         filter: { $zoom: { min: 15 } }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             points:
                 interactive: true
@@ -324,9 +279,6 @@ layers:
     poi_labels:
         data: { source: osm, layer: pois }
         filter: { $zoom: { min: 15 } }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             points:
                 interactive: true
@@ -340,10 +292,7 @@ layers:
                     family: Helvetica
                     fill: '#ccc'
         red:
-            filter: |
-                function () {
-                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-                }
+            filter: global.filter
             draw:
                 points:
                     interactive: true
@@ -358,7 +307,7 @@ layers:
 
     landuse_labels-dot-outlines:
         data: { source: osm, layer: landuse_labels }
-        filter: 
+        filter:
             any:
                 # show labels for smaller landuse areas at higher zooms
                 - { $zoom: { min: 9 },  area: { min: 100000000 } }
@@ -370,9 +319,6 @@ layers:
                 - { $zoom: { min: 15 }, area: { min: 50000 } }
                 - { $zoom: { min: 15 }, area: { min: 10000 } }
                 - { $zoom: { min: 18 } }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             points:
                 interactive: true
@@ -382,7 +328,7 @@ layers:
 
     landuse_labels:
         data: { source: osm }
-        filter: 
+        filter:
             any:
                 # show labels for smaller landuse areas at higher zooms
                 - { $zoom: { min: 9 },  area: { min: 100000000 } }
@@ -394,9 +340,6 @@ layers:
                 - { $zoom: { min: 15 }, area: { min: 50000 } }
                 - { $zoom: { min: 15 }, area: { min: 10000 } }
                 - { $zoom: { min: 18 } }
-        properties: 
-            key_text: ""
-            value_text: ""
         draw:
             points:
                 interactive: true
@@ -410,10 +353,7 @@ layers:
                     family: Helvetica
                     fill: '#ccc'
         red:
-            filter: |
-                function () {
-                    return feature[properties.key_text] && String(feature[properties.key_text]).toLowerCase().indexOf(properties.value_text.toLowerCase()) > -1;
-                }
+            filter: global.filter
             draw:
                 points:
                     interactive: true
