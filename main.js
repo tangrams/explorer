@@ -57,22 +57,14 @@ map = (function () {
 
     function updateKey(value) {
         keytext = value;
-
-        for (layer in scene.config.layers) {
-            if (layer == "earth") continue;
-            scene.config.layers[layer].properties.key_text = value;
-        }
+        scene.config.global.key_text = value;
         scene.rebuild();
         updateURL();
     }
 
     function updateValue(value) {
         valuetext = value;
-
-        for (layer in scene.config.layers) {
-            if (layer == "earth") continue;
-            scene.config.layers[layer].properties.value_text = value;
-        }
+        scene.config.global.value_text = value;
         scene.rebuild();
         updateURL();
     }
