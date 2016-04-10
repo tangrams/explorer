@@ -6,19 +6,14 @@ global:
             return global.key_text && global.value_text &&
                 String(feature[global.key_text]).toLowerCase().indexOf(global.value_text.toLowerCase()) > -1;
         }
+    feature_order: function() { return feature.sort_key; }
 
 scene:
     background:
         color: [.4, .4, .4]
 
-cameras:
-    camera1:
-        type: perspective
-        vanishing_point: [-.25, -.75]
-    camera2:
-        type: isometric
-        axis: [.0, 1.]
-        active: true
+camera:
+    type: isometric
 
 lights:
     light1:
@@ -38,7 +33,7 @@ layers:
         draw:
             polygons:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: [.5, .5, .5]
         red:
             filter: global.filter
@@ -48,7 +43,6 @@ layers:
                     color: red
                     width: 3px
                 text:
-                    text_source: name
                     font:
                         size: 8pt
                         family: Lucida Grande
@@ -60,7 +54,7 @@ layers:
         draw:
             polygons:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: [.6, .6, .6]
         red:
             filter: global.filter
@@ -70,7 +64,6 @@ layers:
                     color: red
                     width: 3px
                 text:
-                    text_source: name
                     font:
                         size: 8pt
                         family: Lucida Grande
@@ -82,10 +75,10 @@ layers:
         draw:
             polygons:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: [.4, .4, .4]
             lines:
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: [.5, .5, .5]
                 width: 1px
         red:
@@ -96,76 +89,18 @@ layers:
                     color: red
                     width: 3px
                 text:
-                    text_source: name
                     font:
                         size: 8pt
                         family: Lucida Grande
                         fill: white
-                        # stroke: { color: black, width: 4 }
-
-    routes:
-        data: { source: osm }
-        filter:
-            route: subway
-            operator: Metropolitan Transportation Authority
-        draw:
-            lines:
-                interactive: true
-                order: function() { return feature.sort_key; }
-                color: '#bbb'
-                width: 4px
-            text:
-                text_source: route_name
-                font:
-                    size: 10px
-                    family: Helvetica
-                    fill: white
-        blue:
-            filter: { ref: [A, C, E] }
-            draw:
-                lines:
-                    color: blue
-        orange:
-            filter: { ref: [B, D, F, M] }
-            draw:
-                lines:
-                    color: orange
-        yellow:
-            filter: { ref: [N, R, Q, J] }
-            draw:
-                lines:
-                    color: yellow
-        red:
-            filter: { ref: ["1", "2", "3"] }
-            draw:
-                lines:
-                    color: red
-        green:
-            filter: { ref: ["4" , "5", "6"] }
-            draw:
-                lines:
-                    color: green
-        match:
-            filter: global.filter
-            draw:
-                lines:
-                    interactive: true
-                    order: 1000
-                    color: red
-                    width: 4px
-                text:
-                    text_source: name
-                    font:
-                        size: 8pt
-                        family: Lucida Grande
-                        fill: white
+                        stroke: { color: black, width: 4 }
 
     roads:
         data: { source: osm }
         draw:
             lines:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: '#bbb'
                 width: 1px
         red:
@@ -176,19 +111,18 @@ layers:
                     color: red
                     width: 2px
                 text:
-                    text_source: name
                     font:
                         size: 8pt
                         family: Lucida Grande
                         fill: white
-                        # stroke: { color: black, width: 4 }
+                        stroke: { color: black, width: 4 }
 
     transit:
         data: { source: osm }
         draw:
             lines:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: '#bbb'
                 width: 2px
         red:
@@ -199,7 +133,6 @@ layers:
                     color: red
                     width: 2px
                 text:
-                    text_source: name
                     font:
                         size: 8pt
                         family: Lucida Grande
@@ -211,7 +144,7 @@ layers:
         draw:
             polygons:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: '#888'
         red:
             filter: global.filter
@@ -221,32 +154,21 @@ layers:
                     color: red
                     width: 3px
                 text:
-                    text_source: name
                     font:
                         size: 8pt
                         family: Lucida Grande
                         fill: white
                         # stroke: { color: black, width: 4 }
 
-    places-dot-outlines:
-        data: { source: osm, layer: places }
-        draw:
-            points:
-                interactive: true
-                order: function() { return feature.sort_key; }
-                color: black
-                size: 14px
-
     places:
         data: { source: osm }
         draw:
             points:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: '#888'
                 size: 10px
             text:
-                text_source: name
                 font:
                     size: 8pt
                     family: Helvetica
@@ -260,7 +182,6 @@ layers:
                     color: '#c88'
                     size: 10px
                 text:
-                    text_source: name
                     font:
                         fill: red
 
@@ -270,7 +191,7 @@ layers:
         draw:
             points:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: black
                 size: 12px
 
@@ -281,11 +202,10 @@ layers:
         draw:
             points:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: '#888'
                 size: 8px
             text:
-                text_source: name
                 font:
                     size: 8pt
                     family: Helvetica
@@ -299,7 +219,6 @@ layers:
                     color: '#c88'
                     size: 10px
                 text:
-                    text_source: name
                     font:
                         fill: red
 
@@ -321,7 +240,7 @@ layers:
         draw:
             points:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: black
                 size: 12px
 
@@ -342,11 +261,10 @@ layers:
         draw:
             points:
                 interactive: true
-                order: function() { return feature.sort_key; }
+                order: global.feature_order
                 color: '#888'
                 size: 8px
             text:
-                text_source: name
                 font:
                     size: 8pt
                     family: Helvetica
@@ -360,6 +278,5 @@ layers:
                     color: '#c88'
                     size: 10px
                 text:
-                    text_source: name
                     font:
                         fill: red
