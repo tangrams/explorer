@@ -20,6 +20,18 @@ global:
                     size: 8pt
                     family: Lucida Grande
                     fill: white
+    landuse-filters:
+        any:
+            # show labels for smaller landuse areas at higher zooms
+            - { $zoom: { min: 9 },  area: { min: 100000000 } }
+            - { $zoom: { min: 10 }, area: { min: 100000000 } }
+            - { $zoom: { min: 11 }, area: { min: 25000000 } }
+            - { $zoom: { min: 12 }, area: { min: 5000000 } }
+            - { $zoom: { min: 13 }, area: { min: 2000000 } }
+            - { $zoom: { min: 14 }, area: { min: 100000 } }
+            - { $zoom: { min: 15 }, area: { min: 50000 } }
+            - { $zoom: { min: 15 }, area: { min: 10000 } }
+            - { $zoom: { min: 18 } }
 scene:
     background:
         color: [.4, .4, .4]
@@ -106,98 +118,51 @@ layers:
             points:
                 interactive: true
                 order: global.feature_order
-                color: '#888'
+                color: '#444'
+                size: 12px
+        red:
+            filter: global.filter
+            draw:
+                points:
+                    interactive: true
+                    color: '#f88'
+                    size: 14px
+                text:
+                    collide: false
+                    anchor: bottom
+                    offset: [0, 7px]
+                    font:
+                        size: 8pt
+                        family: Lucida Grande
+                        fill: white
+
+    pois:
+        data: { source: osm }
+        filter: { $zoom: { min: 15 } }
+        draw:
+            points:
+                interactive: true
+                color: '#555'
                 size: 10px
-            text:
-                font:
-                    size: 8pt
-                    family: Helvetica
-                    fill: '#ccc'
         red:
             filter: global.filter
             draw:
                 points:
                     interactive: true
-                    order: 1000
-                    color: '#c88'
+                    color: '#f88'
                     size: 10px
                 text:
+                    collide: false
+                    anchor: bottom
+                    offset: [0, 7px]
                     font:
-                        fill: red
-
-    poi_labels-dot-outlines:
-        data: { source: osm, layer: pois }
-        filter: { $zoom: { min: 15 } }
-        draw:
-            points:
-                interactive: true
-                order: global.feature_order
-                color: black
-                size: 12px
-
-
-    poi_labels:
-        data: { source: osm, layer: pois }
-        filter: { $zoom: { min: 15 } }
-        draw:
-            points:
-                interactive: true
-                order: global.feature_order
-                color: '#888'
-                size: 8px
-            text:
-                font:
-                    size: 8pt
-                    family: Helvetica
-                    fill: '#ccc'
-        red:
-            filter: global.filter
-            draw:
-                points:
-                    interactive: true
-                    order: 1000
-                    color: '#c88'
-                    size: 10px
-                text:
-                    font:
-                        fill: red
-
-
-    landuse_labels-dot-outlines:
-        data: { source: osm, layer: landuse_labels }
-        filter:
-            any:
-                # show labels for smaller landuse areas at higher zooms
-                - { $zoom: { min: 9 },  area: { min: 100000000 } }
-                - { $zoom: { min: 10 }, area: { min: 100000000 } }
-                - { $zoom: { min: 11 }, area: { min: 25000000 } }
-                - { $zoom: { min: 12 }, area: { min: 5000000 } }
-                - { $zoom: { min: 13 }, area: { min: 2000000 } }
-                - { $zoom: { min: 14 }, area: { min: 100000 } }
-                - { $zoom: { min: 15 }, area: { min: 50000 } }
-                - { $zoom: { min: 15 }, area: { min: 10000 } }
-                - { $zoom: { min: 18 } }
-        draw:
-            points:
-                interactive: true
-                order: global.feature_order
-                color: black
-                size: 12px
+                        size: 8pt
+                        family: Lucida Grande
+                        fill: white
 
     landuse_labels:
         data: { source: osm }
-        filter:
-            any:
-                # show labels for smaller landuse areas at higher zooms
-                - { $zoom: { min: 9 },  area: { min: 100000000 } }
-                - { $zoom: { min: 10 }, area: { min: 100000000 } }
-                - { $zoom: { min: 11 }, area: { min: 25000000 } }
-                - { $zoom: { min: 12 }, area: { min: 5000000 } }
-                - { $zoom: { min: 13 }, area: { min: 2000000 } }
-                - { $zoom: { min: 14 }, area: { min: 100000 } }
-                - { $zoom: { min: 15 }, area: { min: 50000 } }
-                - { $zoom: { min: 15 }, area: { min: 10000 } }
-                - { $zoom: { min: 18 } }
+        filter: global.landuse-filters  
         draw:
             points:
                 interactive: true
