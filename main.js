@@ -116,16 +116,24 @@ map = (function () {
                 }
                 var feature = selection.feature;
                 if (feature != null) {
-                    // console.log("selection map: " + JSON.stringify(feature));
 
                     var label = '';
                     if (feature.properties != null) {
-                        // console.log(feature.properties);
-                        var obj = JSON.parse(JSON.stringify(feature.properties));
+                        var sorted = [];
+                        var count = 0;
+                        Object.keys(feature.properties)
+                            .sort()
+                            .forEach(function(v, i) {
+                                sorted.push([v, feature.properties[v]]);
+                                count++;
+                            });
                         label = "";
-                        for (x in feature.properties) {
-                            val = feature.properties[x];
-                            label += "<span class='labelLine' key='"+x+"' value='"+val+"' onclick='setValuesFromSpan(this)'>"+x+" : "+val+"</span><br>";
+                        label += "layer : "+feature.layers+"<br>";
+
+                        for (x in sorted) {
+                            key = sorted[x][0]
+                            val = sorted[x][1];
+                            label += "<span class='labelLine' key='"+key+"' value='"+val+"' onclick='setValuesFromSpan(this)'>"+key+" : "+val+"</span><br>";
                         }
                     }
 
