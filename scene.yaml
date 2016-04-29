@@ -1,3 +1,18 @@
+scene:
+    background:
+        color: black
+
+styles:
+    transparent:
+        base: polygons
+        blend: add
+    transparent-lines:
+        base: lines
+        blend: inlay
+    transparent-points:
+        base: points
+        blend: inlay
+
 global:
     key_text: ""
     value_text: ""
@@ -11,9 +26,27 @@ global:
         filter: global.filter
         draw:
             lines:
+                base: lines
                 order: 1000
                 color: red
-                width: 3px
+                width: 4px
+            text:
+                text_source: name
+                font:
+                    size: 8pt
+                    family: Lucida Grande
+                    fill: white
+    red-polygons:
+        filter: global.filter
+        draw:
+            lines:
+                order: 1000
+                color: red
+                width: 4px
+            polygons:
+                style: transparent
+                order: 999
+                color: [.2, .0, .0, .5]
             text:
                 text_source: name
                 font:
@@ -32,18 +65,9 @@ global:
             - { $zoom: { min: 15 }, area: { min: 50000 } }
             - { $zoom: { min: 15 }, area: { min: 10000 } }
             - { $zoom: { min: 18 } }
-scene:
-    background:
-        color: [.4, .4, .4]
 
 camera:
     type: isometric
-
-lights:
-    light1:
-        type: directional
-        diffuse: 1
-        ambient: .35
 
 sources:
     osm:
@@ -58,8 +82,8 @@ layers:
             polygons:
                 interactive: true
                 order: global.feature_order
-                color: [.5, .5, .5]
-        red: global.red-lines
+                color: '#333'
+        red: global.red-polygons
 
     landuse:
         data: { source: osm }
@@ -67,8 +91,8 @@ layers:
             polygons:
                 interactive: true
                 order: global.feature_order
-                color: [.6, .6, .6]
-        red: global.red-lines
+                color: '#444'
+        red: global.red-polygons
 
     water:
         data: { source: osm }
@@ -76,57 +100,77 @@ layers:
             polygons:
                 interactive: true
                 order: global.feature_order
-                color: [.4, .4, .4]
+                color: '#222'
             lines:
+                interactive: true
                 order: global.feature_order
-                color: [.5, .5, .5]
-                width: 1px
-        red: global.red-lines
+                color: '#666'
+                width: 2px
+        red: global.red-polygons
 
-    roads:
+    boundaries:
         data: { source: osm }
         draw:
             lines:
                 interactive: true
                 order: global.feature_order
-                color: '#bbb'
-                width: 1px
+                color: '#aaa'
+                width: 2px
+        red: global.red-polygons
+
+    roads:
+        data: { source: osm }
+        draw:
+            lines:
+                style: transparent-lines
+                interactive: true
+                order: global.feature_order
+                color: [.4, .4, .4, .8]
+                width: 3px
         red: global.red-lines
 
     transit:
         data: { source: osm }
         draw:
             lines:
+                style: transparent-lines
                 interactive: true
                 order: global.feature_order
-                color: '#bbb'
+                color: [.5, .5, .5, .6]
                 width: 2px
         red: global.red-lines
 
     buildings:
         data: { source: osm }
         draw:
-            polygons:
+            lines:
+                style: transparent-lines
                 interactive: true
                 order: global.feature_order
-                color: '#888'
-        red: global.red-lines
+                color: [.8, .8, .8, .2]
+                width: 1.5px
+            polygons:
+                style: transparent
+                interactive: true
+                order: global.feature_order
+                color: '#111'
+        red: global.red-polygons
 
     places:
         data: { source: osm }
         draw:
-            points:
+            transparent-points:
+                order: 900
                 interactive: true
-                order: global.feature_order
-                color: '#444'
-                size: 12px
+                color: [.7, .7, .7, .7]
+                size: 8px
         red:
             filter: global.filter
             draw:
                 points:
                     interactive: true
                     color: '#f88'
-                    size: 14px
+                    size: 12px
                 text:
                     collide: false
                     anchor: bottom
@@ -138,19 +182,20 @@ layers:
 
     pois:
         data: { source: osm }
-        filter: { $zoom: { min: 15 } }
+        filter: { $zoom: { min: 14 } }
         draw:
-            points:
+            transparent-points:
+                order: 900
                 interactive: true
-                color: '#555'
-                size: 10px
+                color: [.7, .7, .7, .6]
+                size: 6px
         red:
             filter: global.filter
             draw:
                 points:
                     interactive: true
                     color: '#f88'
-                    size: 10px
+                    size: 8px
                 text:
                     collide: false
                     anchor: bottom
@@ -183,5 +228,15 @@ layers:
                     color: '#c88'
                     size: 10px
                 text:
+                    font:
+                        fill: red
+
+    boundaries_labels:
+        data: { source: osm, layer: boundaries }
+        red:
+            filter: global.filter
+            draw:
+                text:
+                    interactive: true
                     font:
                         fill: red
