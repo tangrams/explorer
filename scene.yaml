@@ -88,10 +88,10 @@ layers:
     landuse:
         data: { source: osm }
         draw:
-            polygons:
+            transparent:
                 interactive: true
                 order: global.feature_order
-                color: '#444'
+                color: '#111'
         red: global.red-polygons
 
     water:
