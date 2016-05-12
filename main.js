@@ -95,6 +95,29 @@ map = (function () {
         keyinput.domElement.onclick = function() { this.getElementsByTagName('input')[0].select(); };
         valueinput.domElement.id = "valuefilter";
         valueinput.domElement.onclick = function() { this.getElementsByTagName('input')[0].select(); };
+
+        // Link to edit in OSM - hold 'shift' and click
+        map.on("click", function(e) {
+            if (e.originalEvent.shiftKey) {
+                var url = 'https://www.openstreetmap.org/edit?';
+                if (scene.selection.feature && scene.selection.feature.id) {
+                    url += 'way=' + scene.selection.feature.id;
+                }
+                if (scene.center) {
+                    url += '#map=' + scene.baseZoom(scene.zoom) + '/' + scene.center.lat + '/' + scene.center.lng;
+                }
+                window.open(url, '_blank');
+            }
+
+            function long2tile(lon,zoom) { return (Math.floor((lon+180)/360*Math.pow(2,zoom))); }
+            function lat2tile(lat,zoom)  { return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 *Math.pow(2,zoom))); }
+
+            if (e.originalEvent.ctrlKey || e.originalEvent.commandKey) {
+                // var url = 'http://vector.mapzen.com/osm/all/' + scene.tile_zoom + '/' + long2tile(e.latlng.lng,scene.tile_zoom)  + '/' + lat2tile(e.latlng.lat,scene.tile_zoom) + '.topojson?api_key=vector-tiles-HqUVidw';
+                var url = 'http://vector.mapzen.com/osm/all/' + scene.tile_manager.view.zoom + '/' + long2tile(e.latlng.lng,scene.tile_manager.view.zoom)  + '/' + lat2tile(e.latlng.lat,scene.tile_manager.view.zoom) + '.topojson?api_key=vector-tiles-HqUVidw';
+                window.open(url, '_blank');
+            }
+        });
     }
 
     // Feature selection
