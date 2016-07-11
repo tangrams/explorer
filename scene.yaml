@@ -160,6 +160,7 @@ layers:
         data: { source: osm }
         draw:
             transparent-points:
+                collide: false
                 order: 900
                 interactive: true
                 color: [.7, .7, .7, .7]
@@ -168,6 +169,7 @@ layers:
             filter: global.filter
             draw:
                 points:
+                    collide: false
                     interactive: true
                     color: '#f88'
                     size: 12px
@@ -185,6 +187,7 @@ layers:
         filter: { $zoom: { min: 14 } }
         draw:
             transparent-points:
+                collide: false
                 order: 900
                 interactive: true
                 color: [.7, .7, .7, .6]
@@ -210,11 +213,13 @@ layers:
         filter: global.landuse-filters  
         draw:
             points:
+                collide: false
                 interactive: true
                 order: global.feature_order
                 color: '#888'
                 size: 8px
             text:
+                collide: false
                 font:
                     size: 8pt
                     family: Helvetica
@@ -223,11 +228,13 @@ layers:
             filter: global.filter
             draw:
                 points:
+                    collide: false
                     interactive: true
                     order: 1000
                     color: '#c88'
                     size: 10px
                 text:
+                    collide: false
                     font:
                         fill: red
 
@@ -237,6 +244,7 @@ layers:
             filter: global.filter
             draw:
                 text:
+                    collide: false
                     interactive: true
                     font:
                         fill: red
