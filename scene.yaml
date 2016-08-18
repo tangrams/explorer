@@ -29,7 +29,7 @@ global:
                 base: lines
                 order: 1000
                 color: red
-                width: 4px
+                width: 2px
             text:
                 text_source: name
                 font:
@@ -42,17 +42,62 @@ global:
             lines:
                 order: 1000
                 color: red
-                width: 4px
+                width: 2px
             polygons:
                 style: transparent
                 order: 999
                 color: [.2, .0, .0, .5]
             text:
                 text_source: name
+                collide: false
+                interactive: true
                 font:
                     size: 8pt
                     family: Lucida Grande
                     fill: white
+        points:
+            filter: { label_placement: 'yes' }
+            draw:
+                points:
+                    collide: false
+                    interactive: true
+                    color: '#f88'
+                    size: 12px
+    # red-points:
+    #     filter: global.filter
+    #     draw:
+    #         text:
+    #             collide: false
+    #             font:
+    #                 size: 12px
+    #                 fill: red
+    #         points:
+    #             filter: { label_placement: yes }
+    #             style: points
+    #             centroid: true
+    #             collide: false
+    #             interactive: true
+    #             color: '#f88'
+    #             size: 12px
+
+    red-text:
+        # filter: global.filter
+        draw:
+            text:
+                text_source: name
+                collide: false
+                font:
+                    size: 12px
+                    fill: red
+            points:
+                filter: { label_placement: yes }
+                style: points
+                centroid: true
+                collide: false
+                interactive: true
+                color: '#f88'
+                size: 12px
+
     landuse-filters:
         any:
             # show labels for smaller landuse areas at higher zooms
@@ -105,7 +150,6 @@ layers:
                 interactive: true
                 order: global.feature_order
                 color: '#666'
-                width: 2px
         red: global.red-polygons
 
     boundaries:
@@ -115,7 +159,8 @@ layers:
                 interactive: true
                 order: global.feature_order
                 color: '#aaa'
-                width: 2px
+            # points:
+            #     visible: false
         red: global.red-polygons
 
     roads:
@@ -206,11 +251,11 @@ layers:
                     font:
                         size: 8pt
                         family: Lucida Grande
-                        fill: white
+                        fill: blue
 
     landuse_labels:
         data: { source: osm }
-        filter: global.landuse-filters  
+        filter: global.landuse-filters
         draw:
             points:
                 collide: false
@@ -225,18 +270,7 @@ layers:
                     family: Helvetica
                     fill: '#ccc'
         red:
-            filter: global.filter
-            draw:
-                points:
-                    collide: false
-                    interactive: true
-                    order: 1000
-                    color: '#c88'
-                    size: 10px
-                text:
-                    collide: false
-                    font:
-                        fill: red
+            draw: global.red-text
 
     boundaries_labels:
         data: { source: osm, layer: boundaries }
@@ -247,4 +281,6 @@ layers:
                     collide: false
                     interactive: true
                     font:
-                        fill: red
+                        size: 8pt
+                        family: Lucida Grande
+                        fill: white
