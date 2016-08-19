@@ -14,102 +14,53 @@ styles:
         blend: inlay
 
 global:
-    key_text: ""
-    value_text: ""
+    key_text: ''
+    value_text: ''
     filter: |
         function () {
-            return global.key_text && global.value_text &&
-                String(feature[global.key_text]).toLowerCase().indexOf(global.value_text.toLowerCase()) > -1;
+            return global.key_text && global.value_text &&  String(feature[global.key_text]).toLowerCase().indexOf(global.value_text.toLowerCase()) > -1;
         }
     feature_order: function() { return feature.sort_key; }
-    red-lines:
+
+    matching:
         filter: global.filter
         draw:
             lines:
-                base: lines
-                order: 1000
-                color: red
-                width: 2px
-            text:
-                text_source: name
-                font:
-                    size: 8pt
-                    family: Lucida Grande
-                    fill: white
-    red-polygons:
-        filter: global.filter
-        draw:
-            lines:
+                interactive: true
                 order: 1000
                 color: red
                 width: 2px
             polygons:
+                interactive: true
                 style: transparent
                 order: 999
                 color: [.2, .0, .0, .5]
-            text:
-                text_source: name
-                collide: false
-                interactive: true
-                font:
-                    size: 8pt
-                    family: Lucida Grande
-                    fill: white
         points:
-            filter: { label_placement: 'yes' }
+            filter: { $geometry: point }
             draw:
                 points:
-                    collide: false
+                    priority: 1
                     interactive: true
                     color: '#f88'
-                    size: 12px
-    # red-points:
-    #     filter: global.filter
-    #     draw:
-    #         text:
-    #             collide: false
-    #             font:
-    #                 size: 12px
-    #                 fill: red
-    #         points:
-    #             filter: { label_placement: yes }
-    #             style: points
-    #             centroid: true
-    #             collide: false
-    #             interactive: true
-    #             color: '#f88'
-    #             size: 12px
-
-    red-text:
-        # filter: global.filter
-        draw:
-            text:
-                text_source: name
-                collide: false
-                font:
-                    size: 12px
-                    fill: red
-            points:
-                filter: { label_placement: yes }
-                style: points
-                centroid: true
-                collide: false
-                interactive: true
-                color: '#f88'
-                size: 12px
-
-    landuse-filters:
-        any:
-            # show labels for smaller landuse areas at higher zooms
-            - { $zoom: { min: 9 },  area: { min: 100000000 } }
-            - { $zoom: { min: 10 }, area: { min: 100000000 } }
-            - { $zoom: { min: 11 }, area: { min: 25000000 } }
-            - { $zoom: { min: 12 }, area: { min: 5000000 } }
-            - { $zoom: { min: 13 }, area: { min: 2000000 } }
-            - { $zoom: { min: 14 }, area: { min: 100000 } }
-            - { $zoom: { min: 15 }, area: { min: 50000 } }
-            - { $zoom: { min: 15 }, area: { min: 10000 } }
-            - { $zoom: { min: 18 } }
+                    size: 8px
+                    cull_from_tile: false
+                    text:
+                        optional: true
+                        # anchor: [bottom, top, right, left, bottom-right, bottom-left, top-right, top-left]
+                        font:
+                            size: 8pt
+                            family: Lucida Grande
+                            fill: white
+        line-and-polygon-labels:
+            filter: { not: { $geometry: point } }
+            draw:
+                text:
+                    priority: 2
+                    interactive: true
+                    font:
+                        size: 8pt
+                        family: Lucida Grande
+                        fill: white
 
 camera:
     type: isometric
@@ -117,7 +68,7 @@ camera:
 sources:
     osm:
         type: TopoJSON
-        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-HqUVidw
+        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson
         max_zoom: 16
 
 layers:
@@ -128,7 +79,7 @@ layers:
                 interactive: true
                 order: global.feature_order
                 color: '#333'
-        red: global.red-polygons
+        matching: global.matching
 
     landuse:
         data: { source: osm }
@@ -137,7 +88,7 @@ layers:
                 interactive: true
                 order: global.feature_order
                 color: '#111'
-        red: global.red-polygons
+        matching: global.matching
 
     water:
         data: { source: osm }
@@ -150,7 +101,8 @@ layers:
                 interactive: true
                 order: global.feature_order
                 color: '#666'
-        red: global.red-polygons
+                width: 2px
+        matching: global.matching
 
     boundaries:
         data: { source: osm }
@@ -159,9 +111,8 @@ layers:
                 interactive: true
                 order: global.feature_order
                 color: '#aaa'
-            # points:
-            #     visible: false
-        red: global.red-polygons
+                width: 2px
+        matching: global.matching
 
     roads:
         data: { source: osm }
@@ -172,7 +123,7 @@ layers:
                 order: global.feature_order
                 color: [.4, .4, .4, .8]
                 width: 3px
-        red: global.red-lines
+        matching: global.matching
 
     transit:
         data: { source: osm }
@@ -183,7 +134,7 @@ layers:
                 order: global.feature_order
                 color: [.5, .5, .5, .6]
                 width: 2px
-        red: global.red-lines
+        matching: global.matching
 
     buildings:
         data: { source: osm }
@@ -199,7 +150,7 @@ layers:
                 interactive: true
                 order: global.feature_order
                 color: '#111'
-        red: global.red-polygons
+        matching: global.matching
 
     places:
         data: { source: osm }
@@ -210,22 +161,7 @@ layers:
                 interactive: true
                 color: [.7, .7, .7, .7]
                 size: 8px
-        red:
-            filter: global.filter
-            draw:
-                points:
-                    collide: false
-                    interactive: true
-                    color: '#f88'
-                    size: 12px
-                text:
-                    collide: false
-                    anchor: bottom
-                    offset: [0, 7px]
-                    font:
-                        size: 8pt
-                        family: Lucida Grande
-                        fill: white
+        matching: global.matching
 
     pois:
         data: { source: osm }
@@ -237,50 +173,4 @@ layers:
                 interactive: true
                 color: [.7, .7, .7, .6]
                 size: 6px
-        red:
-            filter: global.filter
-            draw:
-                points:
-                    interactive: true
-                    color: '#f88'
-                    size: 8px
-                text:
-                    collide: false
-                    anchor: bottom
-                    offset: [0, 7px]
-                    font:
-                        size: 8pt
-                        family: Lucida Grande
-                        fill: blue
-
-    landuse_labels:
-        data: { source: osm }
-        filter: global.landuse-filters
-        draw:
-            points:
-                collide: false
-                interactive: true
-                order: global.feature_order
-                color: '#888'
-                size: 8px
-            text:
-                collide: false
-                font:
-                    size: 8pt
-                    family: Helvetica
-                    fill: '#ccc'
-        red:
-            draw: global.red-text
-
-    boundaries_labels:
-        data: { source: osm, layer: boundaries }
-        red:
-            filter: global.filter
-            draw:
-                text:
-                    collide: false
-                    interactive: true
-                    font:
-                        size: 8pt
-                        family: Lucida Grande
-                        fill: white
+        matching: global.matching
