@@ -16,6 +16,7 @@ styles:
 global:
     key_text: ''
     value_text: ''
+    collide: true
     filter: |
         function () {
             return global.key_text && global.value_text &&  String(feature[global.key_text]).toLowerCase().indexOf(global.value_text.toLowerCase()) > -1;
@@ -45,6 +46,7 @@ global:
                     size: 8px
                     cull_from_tile: false
                     text:
+                        collide: global.collide
                         optional: true
                         # anchor: [bottom, top, right, left, bottom-right, bottom-left, top-right, top-left]
                         font:
