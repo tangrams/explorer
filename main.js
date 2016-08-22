@@ -69,6 +69,11 @@ map = (function () {
         updateURL();
     }
 
+    function updateCollide(value) {
+        scene.config.global.matching.points.draw.points.text.collide = value;
+        scene.rebuild();
+    }
+
     // Create dat GUI
     var gui = new dat.GUI({ autoPlace: true, hideable: false, width: 300 });
     function addGUI () {
@@ -89,6 +94,13 @@ map = (function () {
         });
         valueinput.onChange(function(value) {
             updateValue(value);
+        });
+
+        gui.collide = true;
+        var collide = gui.add(gui, 'collide').name("label collisions");
+
+        collide.onChange(function(value) {
+            updateCollide(value);
         });
         //select input text when you click on it
         keyinput.domElement.id = "keyfilter";
