@@ -68,9 +68,13 @@ camera:
     type: isometric
 
 sources:
-    osm:
+    osm1:
         type: TopoJSON
         url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson
+        max_zoom: 16
+    osm:
+        type: MVT
+        url: http://tile.dev.mapzen.com/vector/v1/all/{z}/{x}/{y}.mvt
         max_zoom: 16
 
 layers:
