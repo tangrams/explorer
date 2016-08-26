@@ -4,4 +4,4 @@ An interactive exploration of Mapzen's [Vector Tile](https://mapzen.com/projects
 
 ### Live demo:
 
-http://tangrams.github.io/explorer
+https://tangrams.github.io/explorer
