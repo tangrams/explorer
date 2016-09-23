@@ -74,7 +74,7 @@ sources:
         max_zoom: 16
     osm:
         type: MVT
-        url: http://tile.dev.mapzen.com/vector/v1/all/{z}/{x}/{y}.mvt
+        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.mvt
         max_zoom: 16
 
 layers:
