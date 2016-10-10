@@ -70,7 +70,7 @@ camera:
 sources:
     osm:
         type: MVT
-        url:  http://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt?api_key=vector-tiles-HqUVidw
+        url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt?api_key=vector-tiles-HqUVidw
         max_zoom: 16
 
 layers:
