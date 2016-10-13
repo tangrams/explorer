@@ -21,7 +21,7 @@ global:
         function () {
             return global.key_text && global.value_text &&  String(feature[global.key_text]).toLowerCase().indexOf(global.value_text.toLowerCase()) > -1;
         }
-    feature_order: function() { return feature.sort_key; }
+    feature_order: function() { return feature.sort_rank; }
 
     matching:
         filter: global.filter
@@ -68,13 +68,9 @@ camera:
     type: isometric
 
 sources:
-    osm1:
-        type: TopoJSON
-        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson
-        max_zoom: 16
     osm:
         type: MVT
-        url: https://vector.mapzen.com/osm/all/{z}/{x}/{y}.mvt
+        url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt?api_key=mapzen-QF1osLn
         max_zoom: 16
 
 layers:

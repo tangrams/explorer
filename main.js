@@ -125,8 +125,7 @@ map = (function () {
             function lat2tile(lat,zoom)  { return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 *Math.pow(2,zoom))); }
 
             if (e.originalEvent.ctrlKey || e.originalEvent.commandKey) {
-                // var url = 'http://vector.mapzen.com/osm/all/' + scene.tile_zoom + '/' + long2tile(e.latlng.lng,scene.tile_zoom)  + '/' + lat2tile(e.latlng.lat,scene.tile_zoom) + '.topojson?api_key=vector-tiles-HqUVidw';
-                var url = 'http://vector.mapzen.com/osm/all/' + scene.tile_manager.view.zoom + '/' + long2tile(e.latlng.lng,scene.tile_manager.view.zoom)  + '/' + lat2tile(e.latlng.lat,scene.tile_manager.view.zoom) + '.topojson?api_key=vector-tiles-HqUVidw';
+                var url = 'https://tile.mapzen.com/mapzen/vector/v1/all/' + scene.tile_manager.view.zoom + '/' + long2tile(e.latlng.lng,scene.tile_manager.view.zoom)  + '/' + lat2tile(e.latlng.lat,scene.tile_manager.view.zoom) + '.topojson?api_key=mapzen-QF1osLn';
                 window.open(url, '_blank');
             }
         });
