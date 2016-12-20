@@ -167,7 +167,6 @@ layers:
 
     pois:
         data: { source: osm }
-        filter: { $zoom: { min: 14 } }
         draw:
             transparent-points:
                 collide: false
