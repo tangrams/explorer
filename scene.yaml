@@ -70,7 +70,9 @@ camera:
 sources:
     osm:
         type: MVT
-        url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt?api_key=mapzen-PvCT6iP
+        url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt
+        url_params:
+            api_key: mapzen-PvCT6iP
         max_zoom: 16
 
 layers:
