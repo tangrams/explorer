@@ -31,9 +31,8 @@ global:
                 order: 1000
                 color: red
                 width: 2px
-            polygons:
+            transparent:
                 interactive: true
-                style: transparent
                 order: 999
                 color: [.2, .0, .0, .5]
         points:
@@ -79,7 +78,7 @@ layers:
     earth:
         data: { source: osm }
         draw:
-            polygons:
+            transparent:
                 interactive: true
                 order: global.feature_order
                 color: '#333'
@@ -92,12 +91,17 @@ layers:
                 interactive: true
                 order: global.feature_order
                 color: '#111'
+            lines:
+                interactive: true
+                order: global.feature_order
+                color: '#666'
+                width: 2px
         matching: global.matching
 
     water:
         data: { source: osm }
         draw:
-            polygons:
+            transparent:
                 interactive: true
                 order: global.feature_order
                 color: '#222'
@@ -114,8 +118,8 @@ layers:
             lines:
                 interactive: true
                 order: global.feature_order
-                color: '#aaa'
-                width: 2px
+                color: '#888'
+                width: 3px
         matching: global.matching
 
     roads:
@@ -149,8 +153,7 @@ layers:
                 order: global.feature_order
                 color: [.8, .8, .8, .2]
                 width: 1.5px
-            polygons:
-                style: transparent
+            transparent:
                 interactive: true
                 order: global.feature_order
                 color: '#111'
