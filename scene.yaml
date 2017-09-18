@@ -44,10 +44,11 @@ global:
                     color: '#f88'
                     size: 8px
                     cull_from_tile: false
+                    collide: false
                     text:
                         collide: global.collide
                         optional: true
-                        # anchor: [bottom, top, right, left, bottom-right, bottom-left, top-right, top-left]
+                        anchor: [bottom, top, right, left, bottom-right, bottom-left, top-right, top-left]
                         font:
                             size: 8pt
                             family: Lucida Grande
