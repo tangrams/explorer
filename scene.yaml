@@ -70,10 +70,11 @@ camera:
 sources:
     osm:
         type: MVT
-        url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt
+        url:  https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt
         url_params:
-            api_key: mapzen-PvCT6iP
+            api_key: 0RWMmjLmT3u-OFeb28qAxg
         max_zoom: 16
+        tile_size: 512
 
 layers:
     earth:
